@@ -19,12 +19,17 @@ fun task41(): Nothing = TODO(
         }
 )
 
+fun <E, T : MutableCollection<E>> Collection<E>.partitionTo(one: T, two: T, partition: (E) -> Boolean ): Pair<T, T> {
+    val (first, second) = this.partition(partition)
+    one.addAll(first)
+    two.addAll(second)
+    return Pair(one, two)
+}
+
 fun List<String>.partitionWordsAndLines(): Pair<List<String>, List<String>> {
-    task41()
-//    return partitionTo(ArrayList<String>(), ArrayList()) { s -> !s.contains(" ") }
+    return partitionTo(ArrayList<String>(), ArrayList<String>()) { s: String -> !s.contains(" ") }
 }
 
 fun Set<Char>.partitionLettersAndOtherSymbols(): Pair<Set<Char>, Set<Char>> {
-    task41()
-//    return partitionTo(HashSet<Char>(), HashSet()) { c -> c in 'a'..'z' || c in 'A'..'Z'}
+    return partitionTo(HashSet<Char>(), HashSet<Char>()) { c: Char -> c in 'a'..'z' || c in 'A'..'Z'}
 }
